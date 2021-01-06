@@ -22,32 +22,42 @@ func main() {
 	check(err)
 	lines := strings.Split(strings.TrimSpace(string(f)), "\n")
 	t, _ := strconv.Atoi(lines[0])
-	b := make([]int, 0)
-	for _, v := range strings.Split(lines[1], ",") {
+	b := make(map[int]int, 0)
+	//	idx := make([]int, 0)
+	for i, v := range strings.Split(lines[1], ",") {
 		if v == "x" {
 			continue
 		}
 		n, _ := strconv.Atoi(v)
-		b = append(b, n)
+		b[i] = n
+		//		idx = append(idx, i)
 	}
 	t1 := time.Now()
 	fmt.Printf("Part 1: %d (%s)\n", part1(t, b), time.Since(t1))
+	t2 := time.Now()
+	fmt.Printf("Part 2: %d (%s)\n", part2(t, b), time.Since(t2))
 	fmt.Printf("Total Time: %s\n", time.Since(start))
 }
 
-func part1(t int, b []int) int {
-	minT, minB := 0, -1
-	for i, bus := range b {
+func part1(t int, b map[int]int) int {
+	minT, minB := 10000, -1
+	for _, bus := range b {
 		next := bus - (t % bus)
-		if i == 0 || next < minT {
+		if next < minT {
 			minT = next
 			minB = bus
 		}
 	}
-	fmt.Println(minT, minB)
 	return minT * minB
 }
 
-func part2(t int, b []int) int {
-
+func part2(t int, b map[int]int) int {
+	res, step := 0, 1
+	for i, bus := range b {
+		for (res+i)%bus != 0 {
+			res += step
+		}
+		step *= bus
+	}
+	return res
 }
