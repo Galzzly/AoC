@@ -116,39 +116,37 @@ func (c *cube) myNeighbours(hyper bool) []cube {
 			cube{w: 0, x: -1, y: 0, z: 1}, cube{w: 0, x: 0, y: 0, z: 1}, cube{w: 0, x: 1, y: 0, z: 1},
 			cube{w: 0, x: -1, y: 1, z: 1}, cube{w: 0, x: 0, y: 1, z: 1}, cube{w: 0, x: 1, y: 1, z: 1},
 		}
-	} else {
-		return []cube{
-			// w -1
-			cube{x: -1, y: -1, z: -1, w: -1}, cube{x: 0, y: -1, z: -1, w: -1}, cube{x: 1, y: -1, z: -1, w: -1},
-			cube{x: -1, y: 0, z: -1, w: -1}, cube{x: 0, y: 0, z: -1, w: -1}, cube{x: 1, y: 0, z: -1, w: -1},
-			cube{x: -1, y: 1, z: -1, w: -1}, cube{x: 0, y: 1, z: -1, w: -1}, cube{x: 1, y: 1, z: -1, w: -1},
-			cube{x: -1, y: -1, z: 0, w: -1}, cube{x: 0, y: -1, z: 0, w: -1}, cube{x: 1, y: -1, z: 0, w: -1},
-			cube{x: -1, y: 0, z: 0, w: -1}, cube{x: 0, y: 0, z: 0, w: -1}, cube{x: 1, y: 0, z: 0, w: -1},
-			cube{x: -1, y: 1, z: 0, w: -1}, cube{x: 0, y: 1, z: 0, w: -1}, cube{x: 1, y: 1, z: 0, w: -1},
-			cube{x: -1, y: -1, z: 1, w: -1}, cube{x: 0, y: -1, z: 1, w: -1}, cube{x: 1, y: -1, z: 1, w: -1},
-			cube{x: -1, y: 0, z: 1, w: -1}, cube{x: 0, y: 0, z: 1, w: -1}, cube{x: 1, y: 0, z: 1, w: -1},
-			cube{x: -1, y: 1, z: 1, w: -1}, cube{x: 0, y: 1, z: 1, w: -1}, cube{x: 1, y: 1, z: 1, w: -1},
-
-			cube{x: -1, y: -1, z: -1, w: 0}, cube{x: 0, y: -1, z: -1, w: 0}, cube{x: 1, y: -1, z: -1, w: 0},
-			cube{x: -1, y: 0, z: -1, w: 0}, cube{x: 0, y: 0, z: -1, w: 0}, cube{x: 1, y: 0, z: -1, w: 0},
-			cube{x: -1, y: 1, z: -1, w: 0}, cube{x: 0, y: 1, z: -1, w: 0}, cube{x: 1, y: 1, z: -1, w: 0},
-			cube{x: -1, y: -1, z: 0, w: 0}, cube{x: 0, y: -1, z: 0, w: 0}, cube{x: 1, y: -1, z: 0, w: 0},
-			cube{x: -1, y: 0, z: 0, w: 0}, cube{x: 1, y: 0, z: 0, w: 0},
-			cube{x: -1, y: 1, z: 0, w: 0}, cube{x: 0, y: 1, z: 0, w: 0}, cube{x: 1, y: 1, z: 0, w: 0},
-			cube{x: -1, y: -1, z: 1, w: 0}, cube{x: 0, y: -1, z: 1, w: 0}, cube{x: 1, y: -1, z: 1, w: 0},
-			cube{x: -1, y: 0, z: 1, w: 0}, cube{x: 0, y: 0, z: 1, w: 0}, cube{x: 1, y: 0, z: 1, w: 0},
-			cube{x: -1, y: 1, z: 1, w: 0}, cube{x: 0, y: 1, z: 1, w: 0}, cube{x: 1, y: 1, z: 1, w: 0},
-
-			cube{x: -1, y: -1, z: -1, w: 1}, cube{x: 0, y: -1, z: -1, w: 1}, cube{x: 1, y: -1, z: -1, w: 1},
-			cube{x: -1, y: 0, z: -1, w: 1}, cube{x: 0, y: 0, z: -1, w: 1}, cube{x: 1, y: 0, z: -1, w: 1},
-			cube{x: -1, y: 1, z: -1, w: 1}, cube{x: 0, y: 1, z: -1, w: 1}, cube{x: 1, y: 1, z: -1, w: 1},
-			cube{x: -1, y: -1, z: 0, w: 1}, cube{x: 0, y: -1, z: 0, w: 1}, cube{x: 1, y: -1, z: 0, w: 1},
-			cube{x: -1, y: 0, z: 0, w: 1}, cube{x: 0, y: 0, z: 0, w: 1}, cube{x: 1, y: 0, z: 0, w: 1},
-			cube{x: -1, y: 1, z: 0, w: 1}, cube{x: 0, y: 1, z: 0, w: 1}, cube{x: 1, y: 1, z: 0, w: 1},
-			cube{x: -1, y: -1, z: 1, w: 1}, cube{x: 0, y: -1, z: 1, w: 1}, cube{x: 1, y: -1, z: 1, w: 1},
-			cube{x: -1, y: 0, z: 1, w: 1}, cube{x: 0, y: 0, z: 1, w: 1}, cube{x: 1, y: 0, z: 1, w: 1},
-			cube{x: -1, y: 1, z: 1, w: 1}, cube{x: 0, y: 1, z: 1, w: 1}, cube{x: 1, y: 1, z: 1, w: 1},
-		}
 	}
+	return []cube{
+		// w -1
+		cube{x: -1, y: -1, z: -1, w: -1}, cube{x: 0, y: -1, z: -1, w: -1}, cube{x: 1, y: -1, z: -1, w: -1},
+		cube{x: -1, y: 0, z: -1, w: -1}, cube{x: 0, y: 0, z: -1, w: -1}, cube{x: 1, y: 0, z: -1, w: -1},
+		cube{x: -1, y: 1, z: -1, w: -1}, cube{x: 0, y: 1, z: -1, w: -1}, cube{x: 1, y: 1, z: -1, w: -1},
+		cube{x: -1, y: -1, z: 0, w: -1}, cube{x: 0, y: -1, z: 0, w: -1}, cube{x: 1, y: -1, z: 0, w: -1},
+		cube{x: -1, y: 0, z: 0, w: -1}, cube{x: 0, y: 0, z: 0, w: -1}, cube{x: 1, y: 0, z: 0, w: -1},
+		cube{x: -1, y: 1, z: 0, w: -1}, cube{x: 0, y: 1, z: 0, w: -1}, cube{x: 1, y: 1, z: 0, w: -1},
+		cube{x: -1, y: -1, z: 1, w: -1}, cube{x: 0, y: -1, z: 1, w: -1}, cube{x: 1, y: -1, z: 1, w: -1},
+		cube{x: -1, y: 0, z: 1, w: -1}, cube{x: 0, y: 0, z: 1, w: -1}, cube{x: 1, y: 0, z: 1, w: -1},
+		cube{x: -1, y: 1, z: 1, w: -1}, cube{x: 0, y: 1, z: 1, w: -1}, cube{x: 1, y: 1, z: 1, w: -1},
 
+		cube{x: -1, y: -1, z: -1, w: 0}, cube{x: 0, y: -1, z: -1, w: 0}, cube{x: 1, y: -1, z: -1, w: 0},
+		cube{x: -1, y: 0, z: -1, w: 0}, cube{x: 0, y: 0, z: -1, w: 0}, cube{x: 1, y: 0, z: -1, w: 0},
+		cube{x: -1, y: 1, z: -1, w: 0}, cube{x: 0, y: 1, z: -1, w: 0}, cube{x: 1, y: 1, z: -1, w: 0},
+		cube{x: -1, y: -1, z: 0, w: 0}, cube{x: 0, y: -1, z: 0, w: 0}, cube{x: 1, y: -1, z: 0, w: 0},
+		cube{x: -1, y: 0, z: 0, w: 0}, cube{x: 1, y: 0, z: 0, w: 0},
+		cube{x: -1, y: 1, z: 0, w: 0}, cube{x: 0, y: 1, z: 0, w: 0}, cube{x: 1, y: 1, z: 0, w: 0},
+		cube{x: -1, y: -1, z: 1, w: 0}, cube{x: 0, y: -1, z: 1, w: 0}, cube{x: 1, y: -1, z: 1, w: 0},
+		cube{x: -1, y: 0, z: 1, w: 0}, cube{x: 0, y: 0, z: 1, w: 0}, cube{x: 1, y: 0, z: 1, w: 0},
+		cube{x: -1, y: 1, z: 1, w: 0}, cube{x: 0, y: 1, z: 1, w: 0}, cube{x: 1, y: 1, z: 1, w: 0},
+
+		cube{x: -1, y: -1, z: -1, w: 1}, cube{x: 0, y: -1, z: -1, w: 1}, cube{x: 1, y: -1, z: -1, w: 1},
+		cube{x: -1, y: 0, z: -1, w: 1}, cube{x: 0, y: 0, z: -1, w: 1}, cube{x: 1, y: 0, z: -1, w: 1},
+		cube{x: -1, y: 1, z: -1, w: 1}, cube{x: 0, y: 1, z: -1, w: 1}, cube{x: 1, y: 1, z: -1, w: 1},
+		cube{x: -1, y: -1, z: 0, w: 1}, cube{x: 0, y: -1, z: 0, w: 1}, cube{x: 1, y: -1, z: 0, w: 1},
+		cube{x: -1, y: 0, z: 0, w: 1}, cube{x: 0, y: 0, z: 0, w: 1}, cube{x: 1, y: 0, z: 0, w: 1},
+		cube{x: -1, y: 1, z: 0, w: 1}, cube{x: 0, y: 1, z: 0, w: 1}, cube{x: 1, y: 1, z: 0, w: 1},
+		cube{x: -1, y: -1, z: 1, w: 1}, cube{x: 0, y: -1, z: 1, w: 1}, cube{x: 1, y: -1, z: 1, w: 1},
+		cube{x: -1, y: 0, z: 1, w: 1}, cube{x: 0, y: 0, z: 1, w: 1}, cube{x: 1, y: 0, z: 1, w: 1},
+		cube{x: -1, y: 1, z: 1, w: 1}, cube{x: 0, y: 1, z: 1, w: 1}, cube{x: 1, y: 1, z: 1, w: 1},
+	}
 }
