@@ -10,6 +10,7 @@ import (
 	"github.com/glenn-brown/golang-pkg-pcre/src/pkg/pcre"
 )
 
+// Rule houses the structure for the task
 type Rule struct {
 	lit     bool
 	content string
