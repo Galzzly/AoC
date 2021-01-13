@@ -70,7 +70,7 @@ func part2(tiles TileSet, tEdge map[string]int) int {
 	var stitcher ImageMap
 	position := Vector{}
 
-	//		Get the first corner
+	// Get the first corner
 	var firstTile Tile
 	for _, t := range tiles {
 		count := 0
@@ -112,15 +112,18 @@ func part2(tiles TileSet, tEdge map[string]int) int {
 					top = string(next.grid[c.size-1])
 				}
 				found = true
+
 				if firstInRow == nil {
 					firstInRow = c
 				}
 				break
 			}
 		}
+
 		if !found {
 			position = Vector{x: 0, y: position.y + 1}
 			left = ""
+
 			top = firstInRow.bottom()
 			firstInRow = nil
 		}
@@ -132,7 +135,6 @@ func part2(tiles TileSet, tEdge map[string]int) int {
 		size: stitcher.size * stitcher.height,
 	}
 	// Find the monsters
-	var t Tile
 	found := false
 	for _, t := range stitched.allOrient() {
 		for y := range t.grid {
@@ -140,6 +142,18 @@ func part2(tiles TileSet, tEdge map[string]int) int {
 				match := true
 				for m := range Monster {
 					if y+m.y >= len(t.grid) {
+						match = false
+						break
+					}
+
+					if x+m.x >= len(t.grid[y+m.y]) {
+						match = false
+						break
+					}
+
+					if t.grid[y+m.y][x+m.x] != '#' {
+						match = false
+						break
 					}
 				}
 				if !match {
@@ -147,7 +161,7 @@ func part2(tiles TileSet, tEdge map[string]int) int {
 				}
 				found = true
 				for m := range Monster {
-					t.grid[y+m.y][x+m.x] = 'o'
+					stitched.grid[y+m.y][x+m.x] = 'O'
 				}
 			}
 		}
@@ -155,11 +169,12 @@ func part2(tiles TileSet, tEdge map[string]int) int {
 			break
 		}
 	}
+
 	//Count the waves
 	w := 0
-	for y := range t.grid {
-		for x := range t.grid[y] {
-			if t.grid[y][x] == '#' {
+	for y := range stitched.grid {
+		for x := range stitched.grid[y] {
+			if stitched.grid[y][x] == '#' {
 				w++
 			}
 		}
@@ -182,7 +197,7 @@ func (t *Tile) allOrient() []Tile {
 
 func (t *Tile) orient(left, top string, tEdge map[string]int) *Tile {
 	for _, o := range t.allOrient() {
-		if tEdge[o.left()] == 1 && tEdge[string(o.grid[0])] == 1 {
+		if ((left == "" && tEdge[o.left()] == 1) || left == o.left()) && ((top == "" && tEdge[o.top()] == 1) || top == o.top()) {
 			return &o
 		}
 	}
