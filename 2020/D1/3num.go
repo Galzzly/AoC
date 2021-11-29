@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func check(e error) {
@@ -38,6 +39,7 @@ func ReadInts(f string) (nums []int, err error) {
 }
 
 func main() {
+	start := time.Now()
 	f := os.Args[1]
 	nums, err := ReadInts(f)
 	if err != nil {
@@ -54,4 +56,5 @@ func main() {
 			}
 		}
 	}
+	fmt.Println(time.Since(start))
 }

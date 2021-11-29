@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -x
+#set -x
 IFS= readarray -d '' line < <(awk -v RS= -v ORS='\0' '1' input)
 
 count=0
@@ -20,6 +20,6 @@ do
 		fi
 	fi
 	((i++))
-	echo $count
+	#echo $count
 done 
 echo $count

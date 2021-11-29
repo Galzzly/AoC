@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -x
+#set -x
 # Need to check the bags that can hold gold bags directly
 # Then check the bags that hold the bags that can hold gold bags
 declare -A deps rdeps
@@ -8,8 +8,9 @@ do
     clr=${line% bags contain*}
     while read n part
     do
-        deps[$clr]=$part:$n
+#        deps[$clr]=$part:$n
         rdeps[$part]=${rdeps[$part]-}${rdeps[$part]+','}$clr
+        echo === ${rdeps[$part]}
     done < <(sed \
         -e 's/, /\n/g' \
         -e 's/\.$//g' \
