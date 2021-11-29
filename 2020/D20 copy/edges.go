@@ -1,6 +1,6 @@
 package main
 
-import "github.com/Galzzly/AoC/2020/utils"
+import "github.com/Galzzly/AoC/utils"
 
 func (t *Tile) allEdge() []string {
 	edges := []string{

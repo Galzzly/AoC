@@ -8,7 +8,7 @@ import (
 	"time"
 
 	jig "github.com/Galzzly/AoC/2020/D20-2"
-	"github.com/Galzzly/AoC/2020/utils"
+	"github.com/Galzzly/AoC/utils"
 )
 
 var Monster map[jig.Vector]struct{}

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Galzzly/AoC/2020/utils"
+	"github.com/Galzzly/AoC/utils"
 )
 
 func main() {
