@@ -1,10 +1,16 @@
 package utils
 
 import (
+	"image"
 	"io/ioutil"
 	"strconv"
 	"strings"
 )
+
+type Point struct {
+	X int
+	Y int
+}
 
 func Check(e error) {
 	if e != nil {
@@ -40,6 +46,12 @@ func ReadIntsByLine(file string) (nums []int) {
 		nums = append(nums, n)
 	}
 	return
+}
+
+func FileLineByComma(file string) []string {
+	f, err := ioutil.ReadFile(file)
+	Check(err)
+	return strings.Split(strings.TrimSpace(string(f)), ",")
 }
 
 func Reverse(s string) string {
@@ -81,4 +93,21 @@ func GetLargest(n []int) (result int) {
 		}
 	}
 	return
+}
+
+func MakeImagePointMap(lines []string) (mapping map[image.Point]rune) {
+	mapping = make(map[image.Point]rune)
+	for y, s := range lines {
+		for x, r := range s {
+			mapping[image.Point{x, y}] = r
+		}
+	}
+	return
+}
+
+func Abs(i int) int {
+	if i < 0 {
+		return -i
+	}
+	return i
 }
