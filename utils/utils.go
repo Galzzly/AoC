@@ -12,6 +12,12 @@ type Point struct {
 	Y int
 }
 
+type Cube struct {
+	X int
+	Y int
+	Z int
+}
+
 func Check(e error) {
 	if e != nil {
 		panic(e)
