@@ -28,6 +28,9 @@ func main() {
 	t2 := time.Now()
 	fmt.Println("Part 2:", part2(instrs), "Took:", time.Since(t2))
 	fmt.Println("Total time: ", time.Since(start))
+	tb := time.Now()
+	p1, p2 := both(instrs)
+	fmt.Println("Part1:", p1, "Part2:", p2, "Took:", time.Since(tb))
 }
 
 func part1(instrs []instr) (res int) {
@@ -61,5 +64,28 @@ func part2(instrs []instr) (res int) {
 		}
 	}
 	res = utils.Abs(pos.Y) * utils.Abs(pos.X)
+	return
+}
+
+// Added this in for a speed test only.
+func both(instrs []instr) (p1, p2 int) {
+	pos1 := utils.Point{0, 0}
+	pos2 := utils.Cube{0, 0, 0}
+	for _, instr := range instrs {
+		switch instr.dir {
+		case "forward":
+			pos1.X += instr.val
+			pos2.X += instr.val
+			pos2.Y += instr.val * pos2.Z
+		case "down":
+			pos1.Y -= instr.val
+			pos2.Z += instr.val
+		case "up":
+			pos1.Y += instr.val
+			pos2.Z -= instr.val
+		}
+	}
+	p1 = utils.Abs(pos1.Y) * utils.Abs(pos1.X)
+	p2 = utils.Abs(pos2.Y) * utils.Abs(pos2.X)
 	return
 }
