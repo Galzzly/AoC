@@ -60,6 +60,15 @@ func FileLineByComma(file string) []string {
 	return strings.Split(strings.TrimSpace(string(f)), ",")
 }
 
+func FileIntsLineByComma(file string) []int {
+	s := FileLineByComma(file)
+	n := make([]int, 0, len(s))
+	for _, a := range s {
+		n = append(n, Atoi(a))
+	}
+	return n
+}
+
 func Reverse(s string) string {
 	var ret strings.Builder
 	r := []rune(s)
