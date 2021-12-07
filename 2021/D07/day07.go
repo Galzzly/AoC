@@ -49,7 +49,7 @@ func part2(nums []int) (res int) {
 		fuel := 0
 		for _, n := range nums {
 			steps := diff(i, n)
-			fuel += int((steps * (steps + 1)) / 2)
+			fuel += (steps * (steps + 1)) / 2
 		}
 		cost = append(cost, fuel)
 	}
