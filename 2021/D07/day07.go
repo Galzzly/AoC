@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"sort"
 	"time"
 
 	"github.com/Galzzly/AoC/utils"
@@ -13,21 +12,22 @@ func main() {
 	start := time.Now()
 	f := os.Args[1]
 	crabmarines := utils.FileIntsLineByComma(f)
-	sort.Ints(crabmarines)
+	// sort.Ints(crabmarines)
+	min, max := utils.MinMax(crabmarines)
 	t1 := time.Now()
-	fmt.Println("Part 1:", part1(crabmarines), '('+time.Since(t1)+')')
+	fmt.Println("Part 1:", part1(crabmarines, min, max), '('+time.Since(t1)+')')
 	t2 := time.Now()
-	fmt.Println("Part 2", part2(crabmarines), '('+time.Since(t2)+')')
+	fmt.Println("Part 2", part2(crabmarines, min, max), '('+time.Since(t2)+')')
 	fmt.Println("Total time: ", time.Since(start))
 	fmt.Println()
 	tb := time.Now()
-	b1, b2 := both(crabmarines)
+	b1, b2 := both(crabmarines, min, max)
 	fmt.Println("1:", b1, ", 2:", b2, "Took:", time.Since(tb))
 }
 
-func part1(crabmarines []int) (res int) {
+func part1(crabmarines []int, min, max int) (res int) {
 	res = -1
-	for i := crabmarines[0]; i <= crabmarines[len(crabmarines)-1]; i++ {
+	for i := min; i <= max; i++ {
 		fuel := 0
 		for _, crabmarine := range crabmarines {
 			fuel += diff(i, crabmarine)
@@ -46,9 +46,9 @@ func diff(a, b int) int {
 	return a - b
 }
 
-func part2(crabmarines []int) (res int) {
+func part2(crabmarines []int, min, max int) (res int) {
 	res = -1
-	for i := crabmarines[0]; i <= crabmarines[len(crabmarines)-1]; i++ {
+	for i := min; i <= max; i++ {
 		fuel := 0
 		for _, crabmarine := range crabmarines {
 			steps := diff(i, crabmarine)
@@ -61,9 +61,9 @@ func part2(crabmarines []int) (res int) {
 	return
 }
 
-func both(crabmarines []int) (r1, r2 int) {
+func both(crabmarines []int, min, max int) (r1, r2 int) {
 	r1, r2 = -1, -1
-	for i := crabmarines[0]; i <= crabmarines[len(crabmarines)-1]; i++ {
+	for i := min; i <= max; i++ {
 		f1, f2 := 0, 0
 		for _, crabmarine := range crabmarines {
 			steps := diff(i, crabmarine)

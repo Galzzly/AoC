@@ -126,3 +126,16 @@ func Abs(i int) int {
 	}
 	return i
 }
+
+func MinMax(nums []int) (min, max int) {
+	min, max = int(^uint(0)>>1), 0
+	for _, n := range nums {
+		if n < min {
+			min = n
+		}
+		if n > max {
+			max = n
+		}
+	}
+	return
+}
