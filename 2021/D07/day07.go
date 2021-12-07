@@ -12,25 +12,25 @@ import (
 func main() {
 	start := time.Now()
 	f := os.Args[1]
-	nums := utils.FileIntsLineByComma(f)
-	sort.Ints(nums)
+	crabmarines := utils.FileIntsLineByComma(f)
+	sort.Ints(crabmarines)
 	t1 := time.Now()
-	fmt.Println("Part 1:", part1(nums), '('+time.Since(t1)+')')
+	fmt.Println("Part 1:", part1(crabmarines), '('+time.Since(t1)+')')
 	t2 := time.Now()
-	fmt.Println("Part 2", part2(nums), '('+time.Since(t2)+')')
+	fmt.Println("Part 2", part2(crabmarines), '('+time.Since(t2)+')')
 	fmt.Println("Total time: ", time.Since(start))
 	fmt.Println()
 	tb := time.Now()
-	b1, b2 := both(nums)
+	b1, b2 := both(crabmarines)
 	fmt.Println("1:", b1, ", 2:", b2, "Took:", time.Since(tb))
 }
 
-func part1(nums []int) (res int) {
+func part1(crabmarines []int) (res int) {
 	res = -1
-	for i := nums[0]; i <= nums[len(nums)-1]; i++ {
+	for i := crabmarines[0]; i <= crabmarines[len(crabmarines)-1]; i++ {
 		fuel := 0
-		for _, n := range nums {
-			fuel += diff(i, n)
+		for _, crabmarine := range crabmarines {
+			fuel += diff(i, crabmarine)
 		}
 		if fuel < res || res == -1 {
 			res = fuel
@@ -46,12 +46,12 @@ func diff(a, b int) int {
 	return a - b
 }
 
-func part2(nums []int) (res int) {
+func part2(crabmarines []int) (res int) {
 	res = -1
-	for i := nums[0]; i <= nums[len(nums)-1]; i++ {
+	for i := crabmarines[0]; i <= crabmarines[len(crabmarines)-1]; i++ {
 		fuel := 0
-		for _, n := range nums {
-			steps := diff(i, n)
+		for _, crabmarine := range crabmarines {
+			steps := diff(i, crabmarine)
 			fuel += (steps * (steps + 1)) / 2
 		}
 		if fuel < res || res == -1 {
@@ -61,12 +61,12 @@ func part2(nums []int) (res int) {
 	return
 }
 
-func both(nums []int) (r1, r2 int) {
+func both(crabmarines []int) (r1, r2 int) {
 	r1, r2 = -1, -1
-	for i := nums[0]; i <= nums[len(nums)-1]; i++ {
+	for i := crabmarines[0]; i <= crabmarines[len(crabmarines)-1]; i++ {
 		f1, f2 := 0, 0
-		for _, n := range nums {
-			steps := diff(i, n)
+		for _, crabmarine := range crabmarines {
+			steps := diff(i, crabmarine)
 			f1 += steps
 			f2 += (steps * (steps + 1)) / 2
 		}
