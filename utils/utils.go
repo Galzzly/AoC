@@ -120,6 +120,17 @@ func MakeImagePointMap(lines []string) (mapping map[image.Point]rune) {
 	return
 }
 
+func MakeIntImagePointMap(lines []string) (mapping map[image.Point]int, rect image.Rectangle) {
+	mapping = make(map[image.Point]int)
+	for y, s := range lines {
+		for x, r := range strings.Split(s, "") {
+			mapping[image.Point{x, y}] = Atoi(r)
+		}
+	}
+	rect = image.Rect(0, 0, len(lines[0]), len(lines))
+	return
+}
+
 func Abs(i int) int {
 	if i < 0 {
 		return -i
