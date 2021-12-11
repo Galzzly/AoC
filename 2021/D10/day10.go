@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"sort"
+	"time"
 
 	"github.com/Galzzly/AoC/utils"
 )
@@ -36,11 +37,13 @@ var (
 )
 
 func main() {
+	start := time.Now()
 	f := os.Args[1]
 	lines := utils.ReadFileLineByLine(f)
 	r1, r2 := both(lines)
-	fmt.Println(r1)
-	fmt.Println(r2)
+	fmt.Println("Part 1:", r1)
+	fmt.Println("Part 2:", r2)
+	fmt.Println("Time Taken:", time.Since(start))
 }
 
 func both(lines []string) (r1, r2 int) {
