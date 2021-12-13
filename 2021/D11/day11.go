@@ -26,31 +26,28 @@ func main() {
 	start := time.Now()
 	lines := utils.ReadFileLineByLine(os.Args[1])
 	octopuses, rect := utils.MakeIntImagePointMap(lines)
-	t1 := time.Now()
-	fmt.Println("Part 1:", part1(octopuses, rect), "Took:", time.Since(t1))
-	t2 := time.Now()
-	fmt.Println("Part 2:", part2(octopuses, rect), "Took:", time.Since(t2))
+	tb := time.Now()
+	r1, r2 := both(octopuses, rect)
+	fmt.Println("Part 1:", r1, "\nPart 2:", r2, "\nTook:", time.Since(tb))
 	fmt.Println("Total Time:", time.Since(start))
 }
 
-func part1(octopusus map[image.Point]int, rect image.Rectangle) (res int) {
-	current := octopusus
-	var count int
-	for i := 0; i < 100; i++ {
-		current, count = step(current, rect)
-		res += count
-	}
-	return
-}
-
-func part2(octopuses map[image.Point]int, rect image.Rectangle) (res int) {
+func both(octopuses map[image.Point]int, rect image.Rectangle) (r1, r2 int) {
 	current := octopuses
-	var count int
-	for {
-		res++
+	var count, r1step int
+	var r1b, r2b = false, false
+	for !(r2b && r1b) {
+		r1step++
+		if !r2b {
+			r2++
+		}
 		current, count = step(current, rect)
 		if count == 100 {
-			break
+			r2b = true
+		}
+		r1 += count
+		if r1step == 100 {
+			r1b = true
 		}
 	}
 	return
