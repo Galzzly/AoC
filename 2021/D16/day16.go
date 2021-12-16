@@ -21,7 +21,7 @@ func main() {
 	start := time.Now()
 	_, part1, part2 := parse(hexBits, 0)
 	fmt.Printf("Part 1: %d\n", part1)
-	fmt.Printf("Part 1: %d\n", part2)
+	fmt.Printf("Part 2: %d\n", part2)
 	fmt.Printf("Time: %v\n", time.Since(start))
 
 }
