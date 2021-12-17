@@ -31,6 +31,13 @@ func ReadFileLineByLine(file string) []string {
 	return lines
 }
 
+func ReadFileSingleLine(file string) (line string) {
+	f, err := ioutil.ReadFile(file)
+	Check(err)
+	line = strings.Split(strings.TrimSpace(string(f)), "\n")[0]
+	return line
+}
+
 func ReadFileDoubleLine(file string) []string {
 	f, err := ioutil.ReadFile(file)
 	Check(err)
