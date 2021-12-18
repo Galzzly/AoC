@@ -11,28 +11,24 @@ import (
 func main() {
 	start := time.Now()
 	line := utils.ReadFileSingleLine("input")
-	fmt.Println(line)
 	var x1, x2 int
 	var y1, y2 int
 	fmt.Sscanf(line, "target area: x=%d..%d, y=%d..%d", &x1, &x2, &y1, &y2)
-	fmt.Printf("%d,%d && %d,%d\n", x1, y1, x2, y2)
-	r1, r2 := arc(x1, y1, x2, y2)
-	fmt.Printf("Part 1: %d\nPart 2: %d\n", r1, r2)
+	t1 := time.Now()
+	fmt.Printf("Part 1: %d in %s\n", -y1*(-y1-1)/2, time.Since(t1))
+	t2 := time.Now()
+	fmt.Printf("Part 2: %d in %s\n", arc(x1, y1, x2, y2), time.Since(t2))
 	fmt.Printf("Time: %s\n", time.Since(start))
 }
 
-func arc(x1, y1, x2, y2 int) (p1res, p2res int) {
-	p1res = math.MinInt
+func arc(x1, y1, x2, y2 int) (res int) {
 	startX, endX := utils.MinMax([]int{0, x2})
 	startY, endY := utils.MinMax([]int{-y1, y1})
 	for x := startX; x <= endX; x++ {
 		for y := startY; y <= endY; y++ {
 			peak := checkPeak(x, y, x1, y1, x2, y2)
 			if peak != math.MinInt {
-				p2res++
-			}
-			if peak > p1res {
-				p1res = peak
+				res++
 			}
 		}
 	}
