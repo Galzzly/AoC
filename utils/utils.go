@@ -126,6 +126,16 @@ func MakeImagePointMap(lines []string) (mapping map[image.Point]rune) {
 	}
 	return
 }
+func MakeImagePointMapRect(lines []string) (mapping map[image.Point]rune, rect image.Rectangle) {
+	mapping = make(map[image.Point]rune)
+	for y, s := range lines {
+		for x, r := range s {
+			mapping[image.Point{x, y}] = r
+		}
+	}
+	rect = image.Rect(0, 0, len(lines[0])-1, len(lines)-1)
+	return
+}
 
 func MakeIntImagePointMap(lines []string) (mapping map[image.Point]int, rect image.Rectangle) {
 	mapping = make(map[image.Point]int)
@@ -136,6 +146,10 @@ func MakeIntImagePointMap(lines []string) (mapping map[image.Point]int, rect ima
 	}
 	rect = image.Rect(0, 0, len(lines[0]), len(lines))
 	return
+}
+
+func Adj(p, d image.Point) image.Point {
+	return p.Add(d)
 }
 
 func Abs(i int) int {
