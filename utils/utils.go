@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"strconv"
 	"strings"
+	"sort"
 )
 
 type Point struct {
@@ -170,4 +171,17 @@ func MinMax(nums []int) (min, max int) {
 		}
 	}
 	return
+}
+
+func SortUniqInts(s []int) []int {
+	sort.Ints(s)
+	j := 1
+	for i := 1; i < len(s); i++ {
+		if s[i] == s[i-1] {
+			continue
+		}
+		s[j] = s[i]
+		j++
+	}
+	return s[:j]	
 }
