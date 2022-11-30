@@ -9,13 +9,7 @@ import (
 
 func main() {
 	start := time.Now()
-	instructions := utils.ReadFileLineByLine("input")
-	// for _, instr := range instructions {
-	// 	if strings.Contains(instr, "inp") {
-	// 		fmt.Println(instr)
-	// 	}
-	// }
-	// fmt.Println(instructions)
+	instructions := utils.ReadFileLineByLine("prestwood")
 	r1, r2 := checkMonad(instructions)
 	fmt.Printf("Part 1: %d\n", r1)
 	fmt.Printf("Part 2: %d\n", r2)
