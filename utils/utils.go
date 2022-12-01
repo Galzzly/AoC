@@ -3,9 +3,9 @@ package utils
 import (
 	"image"
 	"io/ioutil"
+	"sort"
 	"strconv"
 	"strings"
-	"sort"
 )
 
 type Point struct {
@@ -109,10 +109,11 @@ func Atoi(s string) int {
 	return i
 }
 
-func GetLargest(n []int) (result int) {
-	for _, i := range n {
-		if i > result {
-			result = i
+func GetLargest(n []int) (key, result int) {
+	for k, v := range n {
+		if v > result {
+			result = v
+			key = k
 		}
 	}
 	return
@@ -183,5 +184,12 @@ func SortUniqInts(s []int) []int {
 		s[j] = s[i]
 		j++
 	}
-	return s[:j]	
+	return s[:j]
+}
+
+func SumArray(n []int) (res int) {
+	for _, v := range n {
+		res += v
+	}
+	return
 }
