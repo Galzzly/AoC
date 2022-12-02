@@ -26,9 +26,8 @@ func main() {
 func getElves(lines []string) []int {
 	var res []int
 	for _, l := range lines {
-		v := strings.Split(strings.TrimSpace(l), "\n")
 		var cal int
-		for _, n := range v {
+		for _, n := range strings.Split(strings.TrimSpace(l), "\n") {
 			cal += utils.Atoi(n)
 		}
 		res = append(res, cal)
