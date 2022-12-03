@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/Galzzly/AoC/utils"
@@ -33,11 +34,9 @@ func part1(lines []string) (res int) {
 bag:
 	for _, r := range getRucksacks(lines) {
 		for _, c := range r[0] {
-			for _, c2 := range r[1] {
-				if c == c2 {
-					res += values[c]
-					continue bag
-				}
+			if strings.ContainsRune(r[1], c) {
+				res += values[c]
+				continue bag
 			}
 		}
 	}
@@ -47,16 +46,10 @@ bag:
 func part2(rucksacks []string) (res int) {
 bags:
 	for i := 0; i < len(rucksacks); i += 3 {
-		for _, c1 := range rucksacks[i] {
-			for _, c2 := range rucksacks[i+1] {
-				if c1 == c2 {
-					for _, c3 := range rucksacks[i+2] {
-						if c1 == c3 {
-							res += values[c1]
-							continue bags
-						}
-					}
-				}
+		for _, c := range rucksacks[i] {
+			if strings.ContainsRune(rucksacks[i+1], c) && strings.ContainsRune(rucksacks[i+2], c) {
+				res += values[c]
+				continue bags
 			}
 		}
 	}
@@ -68,6 +61,5 @@ func getRucksacks(lines []string) (res [][]string) {
 		l := len(line) / 2
 		res = append(res, []string{line[:l], line[l:]})
 	}
-
 	return
 }
