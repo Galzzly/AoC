@@ -46,6 +46,13 @@ func ReadFileDoubleLine(file string) []string {
 	return lines
 }
 
+func ReadFileDoubleLineNoTrim(file string) []string {
+	f, err := ioutil.ReadFile(file)
+	Check(err)
+	lines := strings.Split(string(f), "\n\n")
+	return lines
+}
+
 func ReadIntsByLine(file string) (nums []int) {
 	f, err := ioutil.ReadFile(file)
 	Check(err)
