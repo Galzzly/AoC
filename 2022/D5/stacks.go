@@ -20,12 +20,11 @@ func main() {
 	sects := utils.ReadFileDoubleLineNoTrim(f)
 	s1, s2, k := getStack(sects[0])
 	rules := getRules(sects[1])
-	fmt.Println(k)
 
 	p1, p2 := solve(s1, s2, k, rules)
-	fmt.Println(p1)
-	fmt.Println(p2)
-	fmt.Println(time.Since(start))
+	fmt.Println("Part 1:", p1)
+	fmt.Println("Part 2:", p2)
+	fmt.Println("Time Taken:", time.Since(start))
 }
 
 func solve(s1, s2 map[rune]string, k string, rules []rule) (r1, r2 string) {
