@@ -126,6 +126,16 @@ func GetLargest(n []int) (key, result int) {
 	return
 }
 
+func MakeImagePointSquareBool(max int) (mapping map[image.Point]bool) {
+	mapping = make(map[image.Point]bool)
+	for x := 0; x < max; x++ {
+		for y := 0; y < max; y++ {
+			mapping[image.Point{x, y}] = false
+		}
+	}
+	return
+}
+
 func MakeImagePointMap(lines []string) (mapping map[image.Point]rune) {
 	mapping = make(map[image.Point]rune)
 	for y, s := range lines {
@@ -147,13 +157,18 @@ func MakeImagePointMapRect(lines []string) (mapping map[image.Point]rune, rect i
 }
 
 func MakeIntImagePointMap(lines []string) (mapping map[image.Point]int, rect image.Rectangle) {
+	mapping = MakeIntImagePoint(lines)
+	rect = image.Rect(0, 0, len(lines[0]), len(lines))
+	return
+}
+
+func MakeIntImagePoint(lines []string) (mapping map[image.Point]int) {
 	mapping = make(map[image.Point]int)
 	for y, s := range lines {
 		for x, r := range strings.Split(s, "") {
 			mapping[image.Point{x, y}] = Atoi(r)
 		}
 	}
-	rect = image.Rect(0, 0, len(lines[0]), len(lines))
 	return
 }
 

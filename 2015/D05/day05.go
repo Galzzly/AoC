@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/Galzzly/AoC/utils"
 )
@@ -25,21 +26,26 @@ func part1(lines []string) (res int) {
 
 func part2(lines []string) (res int) {
 	for _, line := range lines {
-		if checkTwoPair(line) {
+		if checkPair(line) && checkRepeat(line) {
 			res++
 		}
 	}
+	return
 }
 
-func checkTwoPair(s string) bool {
-	if len(s) < 4 {
-		return false
+func checkRepeat(line string) bool {
+	for i := range line[:len(line)-2] {
+		if line[i] == line[i+2] {
+			return true
+		}
 	}
-	for i := 0; i < len(s)-2; i++ {
-		pair := s[i : i+2]
-		var c int
+	return false
+}
 
-		if c == 2 {
+func checkPair(line string) bool {
+	for i := range line[:len(line)-1] {
+		if strings.Count(line, line[i:i+2]) > 1 {
+
 			return true
 		}
 	}
