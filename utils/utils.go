@@ -158,7 +158,7 @@ func MakeImagePointMapRect(lines []string) (mapping map[image.Point]rune, rect i
 
 func MakeIntImagePointMap(lines []string) (mapping map[image.Point]int, rect image.Rectangle) {
 	mapping = MakeIntImagePoint(lines)
-	rect = image.Rect(0, 0, len(lines[0]), len(lines))
+	rect = image.Rect(0, 0, len(lines[0])-1, len(lines)-1)
 	return
 }
 
