@@ -64,17 +64,3 @@ func lights(lines []string) (r1, r2 int) {
 	}
 	return
 }
-
-// func getInstr(lines []string) (res []instr) {
-// 	for _, line := range lines {
-// 		var power string
-// 		var minx, miny, maxx, maxy int
-// 		if strings.HasPrefix(line, "turn") {
-// 			fmt.Sscanf(line, "turn %s %d,%d through %d,%d", &power, &minx, &miny, &maxx, &maxy)
-// 		} else {
-// 			fmt.Sscanf(line, "%s %d,%d through %d,%d", &power, &minx, &miny, &maxx, &maxy)
-// 		}
-// 		res = append(res, instr{power, utils.Point{minx, miny}, utils.Point{maxx, maxy}})
-// 	}
-// 	return
-// }

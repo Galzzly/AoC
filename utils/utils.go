@@ -215,3 +215,20 @@ func SumArray(n []int) (res int) {
 	}
 	return
 }
+
+func Biggest(a, b int) (res int) {
+	if a < b {
+		return b
+	}
+	return a
+}
+
+func Select[T any](in []T, f func(i T) bool) (res []T) {
+	res = make([]T, 0)
+	for _, v := range in {
+		if f(v) {
+			res = append(res, v)
+		}
+	}
+	return
+}
