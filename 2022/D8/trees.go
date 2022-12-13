@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"image"
+	"sync"
 	"time"
 
 	"github.com/Galzzly/AoC/utils"
@@ -21,19 +22,35 @@ func main() {
 }
 
 func solve(treemap Treemap) (r1, r2 int) {
-	for k, v := range treemap {
-		vis, score := treemap.lookaround(k, v)
-		r1 += vis
-		if score > r2 {
-			r2 = score
+	vis := make(chan int, len(treemap))
+	score := make(chan int, len(treemap))
+	var wg sync.WaitGroup
+	wg.Add(len(treemap))
+	go func() {
+		for k, v := range treemap {
+			go treemap.lookaround(k, v, vis, score, &wg)
+			// go treemap.lookaround(k, v, vis, score)
+		}
+		wg.Wait()
+		close(vis)
+		close(score)
+	}()
+	for v := range vis {
+		r1 += v
+	}
+	for v := range score {
+		if v > r2 {
+			r2 = v
 		}
 	}
 	return
 }
 
-func (t Treemap) lookaround(k image.Point, v int) (r1, r2 int) {
-	r2 = 1
+func (t Treemap) lookaround(k image.Point, v int, vis chan int, score chan int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	r1, r2 := 0, 1
 	for _, p := range []image.Point{{0, -1}, {1, 0}, {0, 1}, {-1, 0}} {
+
 		for np, i := k.Add(p), 0; ; np, i = np.Add(p), i+1 {
 			if _, ok := t[np]; !ok {
 				r1, r2 = 1, r2*i
@@ -45,5 +62,6 @@ func (t Treemap) lookaround(k image.Point, v int) (r1, r2 int) {
 			}
 		}
 	}
-	return
+	vis <- r1
+	score <- r2
 }
