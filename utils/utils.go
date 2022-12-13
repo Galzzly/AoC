@@ -2,7 +2,7 @@ package utils
 
 import (
 	"image"
-	"io/ioutil"
+	"os"
 	"sort"
 	"strconv"
 	"strings"
@@ -26,35 +26,35 @@ func Check(e error) {
 }
 
 func ReadFileLineByLine(file string) []string {
-	f, err := ioutil.ReadFile(file)
+	f, err := os.ReadFile(file)
 	Check(err)
 	lines := strings.Split(strings.TrimSpace(string(f)), "\n")
 	return lines
 }
 
 func ReadFileSingleLine(file string) (line string) {
-	f, err := ioutil.ReadFile(file)
+	f, err := os.ReadFile(file)
 	Check(err)
 	line = strings.Split(strings.TrimSpace(string(f)), "\n")[0]
 	return line
 }
 
 func ReadFileDoubleLine(file string) []string {
-	f, err := ioutil.ReadFile(file)
+	f, err := os.ReadFile(file)
 	Check(err)
 	lines := strings.Split(strings.TrimSpace(string(f)), "\n\n")
 	return lines
 }
 
 func ReadFileDoubleLineNoTrim(file string) []string {
-	f, err := ioutil.ReadFile(file)
+	f, err := os.ReadFile(file)
 	Check(err)
 	lines := strings.Split(string(f), "\n\n")
 	return lines
 }
 
 func ReadIntsByLine(file string) (nums []int) {
-	f, err := ioutil.ReadFile(file)
+	f, err := os.ReadFile(file)
 	Check(err)
 	lines := strings.Split(strings.TrimSpace(string(f)), "\n")
 	nums = make([]int, 0, len(lines))
@@ -70,7 +70,7 @@ func ReadIntsByLine(file string) (nums []int) {
 }
 
 func FileLineByComma(file string) []string {
-	f, err := ioutil.ReadFile(file)
+	f, err := os.ReadFile(file)
 	Check(err)
 	return strings.Split(strings.TrimSpace(string(f)), ",")
 }
