@@ -232,3 +232,64 @@ func Select[T any](in []T, f func(i T) bool) (res []T) {
 	}
 	return
 }
+
+func CopyMap[K comparable, V any](m map[K]V) (res map[K]V) {
+	res = make(map[K]V)
+	for k, v := range m {
+		res[k] = v
+	}
+	return
+}
+
+func Combo[T any](iterable []T, r int) chan []T {
+	ch := make(chan []T)
+
+	go func() {
+		l := len(iterable)
+		for combo := range GenCombo(l, r) {
+			res := make([]T, r)
+			for i, v := range combo {
+				res[i] = iterable[v]
+			}
+			ch <- res
+		}
+		close(ch)
+	}()
+	return ch
+}
+
+func GenCombo(n, r int) <-chan []int {
+	if r > n {
+		panic("invalid argument")
+	}
+	ch := make(chan []int)
+
+	go func() {
+		res := make([]int, r)
+		for i := range res {
+			res[i] = i
+		}
+		t := make([]int, r)
+		copy(t, res)
+		ch <- t
+		for {
+			for i := r - 1; i >= 0; i-- {
+				if res[i] < i+n-r {
+					res[i]++
+					for j := 1; j < r-i; j++ {
+						res[i+j] = res[i] + j
+					}
+					t := make([]int, r)
+					copy(t, res)
+					ch <- t
+					break
+				}
+			}
+			if res[0] >= n-r {
+				break
+			}
+		}
+		close(ch)
+	}()
+	return ch
+}

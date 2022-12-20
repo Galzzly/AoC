@@ -1,0 +1,5 @@
+Sensor at x=10, y=0: closest beacon is at x=10, y=99
+Sensor at x=10000000, y=99: closest beacon is at x=11, y=99
+Sensor at x=-10000000, y=99: closest beacon is at x=9, y=99
+Sensor at x=9, y=50000000: closest beacon is at x=9, y=100
+Sensor at x=11, y=50000000: closest beacon is at x=11, y=100
