@@ -18,7 +18,7 @@ type Monkey struct {
 func main() {
 	start := time.Now()
 	f := "input.txt"
-	f = "test"
+	// f = "test"
 	lines := utils.ReadFileDoubleLine(f)
 	monkeys, trans := getMonkeys(lines)
 	newt1 := time.Now()

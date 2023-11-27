@@ -109,7 +109,7 @@ func buildCave(lines []string) Cave {
 					} else {
 						d = -1
 					}
-					for x := cP.X; x != nX; x += 1 * d {
+					for x := cP.X; x != nX; x += d {
 						rocks[image.Point{x, nY}] = 'R'
 					}
 				} else if nY != cP.Y {
