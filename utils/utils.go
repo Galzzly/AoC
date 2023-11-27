@@ -241,6 +241,14 @@ func CopyMap[K comparable, V any](m map[K]V) (res map[K]V) {
 	return
 }
 
+func CopySlice[V any](s []V) (res []V) {
+	res = make([]V, len(s))
+	for k, v := range s {
+		res[k] = v
+	}
+	return
+}
+
 func Combo[T any](iterable []T, r int) chan []T {
 	ch := make(chan []T)
 
