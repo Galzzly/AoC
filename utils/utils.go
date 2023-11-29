@@ -223,6 +223,13 @@ func Biggest(a, b int) (res int) {
 	return a
 }
 
+func Ter[T any](cond bool, a, b T) T {
+	if cond {
+		return a
+	}
+	return b
+}
+
 func Select[T any](in []T, f func(i T) bool) (res []T) {
 	res = make([]T, 0)
 	for _, v := range in {
