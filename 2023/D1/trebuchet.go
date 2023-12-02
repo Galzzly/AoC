@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 	"unicode"
 
@@ -29,33 +30,53 @@ type digit struct {
 	num string
 }
 
+type returns struct {
+	r1, r2 int
+}
+
 func main() {
 	start := time.Now()
 	f := "input.txt"
 	lines := utils.ReadFileLineByLine(f)
-	calcstart := time.Now()
-	p1, p2 := calculate(lines)
-	calctime := time.Since(calcstart)
-	fmt.Println("Part 1:", p1)
-	fmt.Println("Part 2:", p2)
-	fmt.Println("Calc time:", calctime)
+	c2start := time.Now()
+	c2p1, c2p2 := calc2(lines)
+	c2time := time.Since(c2start)
+	fmt.Printf("calc2, P1: %d, P2: %d, Took: %s\n", c2p1, c2p2, c2time)
 	fmt.Println("Total time:", time.Since(start))
 }
 
-func calculate(lines []string) (r1, r2 int) {
+func calc2(lines []string) (r1, r2 int) {
+	var wg sync.WaitGroup
+	ch := make(chan returns, len(lines))
 	for _, line := range lines {
-		digits := findNums(line)
-		r1 += utils.Atoi(digits[0].num + digits[1].num)
+		wg.Add(1)
+		go func(line string, wg *sync.WaitGroup, ch1 chan returns) {
+			defer wg.Done()
+			var res returns
+			digits := findNums(line)
+			res.r1 = utils.Atoi(digits[0].num + digits[1].num)
 
-		words := findWords(line)
-		if digits[0].id == -1 || (words[0].id != -1 && words[0].id < digits[0].id) {
-			digits[0] = words[0]
-		}
-		if words[1].id != -1 && words[1].id > digits[1].id {
-			digits[1] = words[1]
-		}
-		r2 += utils.Atoi(digits[0].num + digits[1].num)
+			words := findWords(line)
+			if digits[0].id == -1 || (words[0].id != -1 && words[0].id < digits[0].id) {
+				digits[0] = words[0]
+			}
+			if words[1].id != -1 && words[1].id > digits[1].id {
+				digits[1] = words[1]
+			}
+			res.r2 = utils.Atoi(digits[0].num + digits[1].num)
+			ch <- res
+		}(line, &wg, ch)
 	}
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
+
+	for res := range ch {
+		r1 += res.r1
+		r2 += res.r2
+	}
+
 	return
 }
 

@@ -6,16 +6,16 @@ import (
 	"time"
 )
 
-type CostedNode[T] struct {
+type CostedNode [T]struct {
 	Node T
 	Cost int
 }
 
-type THeap[T] []CostedNode[T]
+type THeap [T][]CostedNode[T]
 
-func (t THeap[T]) Len() int { return len(t) }
+func (t THeap[T]) Len() int           { return len(t) }
 func (t THeap[T]) Less(i, j int) bool { return t[i].Cost < t[j].Cost }
-func (t THeap[T]) Swap(i, j int) {t[i], t[j] = t[j], t[i]}
+func (t THeap[T]) Swap(i, j int)      { t[i], t[j] = t[j], t[i] }
 
 func (t *THeap[T]) Push(x interface{}) {
 	*t = append(*t, x.(CostedNode[T]))
@@ -56,17 +56,17 @@ func Dijkstra[T comparable](graph Traversable[T], start T, stop T) (int, []Coste
 				node = prevNode
 				path = append(path, CostedNode[T]{Node: node, Cost: costs[node]})
 			}
-			for i, j := 0, len(path) - 1; i < j; i, j = i + 1, j - 1 {
+			for i, j := 0, len(path)-1; i < j; i, j = i+1, j-1 {
 				path[i], path[j] = path[j], path[i]
 			}
 			return cost, path
 		}
 
 		n++
-		if n % 100000 == 0 {
+		if n%100000 == 0 {
 			fmt.Printf("%d\n", n)
 		}
-		if n % 1000000 == 0 {
+		if n%1000000 == 0 {
 			fmt.Printf("%d\n", n)
 			fmt.Printf("%s\n", time.Since(startT))
 			startT = time.Now()
