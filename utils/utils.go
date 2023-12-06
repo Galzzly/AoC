@@ -216,11 +216,26 @@ func SumArray(n []int) (res int) {
 	return
 }
 
+func MultiplyArray(n []int) (res int) {
+	res = 1
+	for _, v := range n {
+		res *= v
+	}
+	return
+}
+
 func Biggest(a, b int) (res int) {
 	if a < b {
 		return b
 	}
 	return a
+}
+
+func Min(a, b int) (res int) {
+	if a < b {
+		return a
+	}
+	return b
 }
 
 func Ter[T any](cond bool, a, b T) T {
@@ -307,4 +322,16 @@ func GenCombo(n, r int) <-chan []int {
 		close(ch)
 	}()
 	return ch
+}
+
+func ChunkSlice[T any](input []T, size int) [][]T {
+	out := make([][]T, 0, len(input)/size)
+	for i := 0; i < len(input); i += size {
+		chunk := make([]T, 0, size)
+		for j := 0; j < size; j++ {
+			chunk = append(chunk, input[i+j])
+		}
+		out = append(out, chunk)
+	}
+	return out
 }
