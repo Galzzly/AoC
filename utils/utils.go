@@ -84,6 +84,24 @@ func FileIntsLineByComma(file string) []int {
 	return n
 }
 
+func ReadRowIntsByLine(file string) (nums [][]int) {
+	f, err := os.ReadFile(file)
+	Check(err)
+	lines := strings.Split(strings.TrimSpace(string(f)), "\n")
+	nums = make([][]int, len(lines))
+	for l := range lines {
+		if len(lines[l]) == 0 {
+			continue
+		}
+		s := strings.Split(lines[l], " ")
+		nums[l] = make([]int, 0, len(s))
+		for i := range s {
+			nums[l] = append(nums[l], Atoi(s[i]))
+		}
+	}
+	return
+}
+
 func Reverse(s string) string {
 	var ret strings.Builder
 	r := []rune(s)
