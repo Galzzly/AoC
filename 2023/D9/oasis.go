@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"slices"
 	"time"
 
 	"github.com/Galzzly/AoC/utils"
@@ -12,32 +11,22 @@ func main() {
 	start := time.Now()
 	f := "input.txt"
 	nums := utils.ReadRowIntsByLine(f)
-	t1 := time.Now()
-	fmt.Println("Part 1:", part1(nums), "Took:", time.Since(t1))
-	t2 := time.Now()
-	fmt.Println("Part 2:", part2(nums), "Took:", time.Since(t2))
+	solvetime := time.Now()
+	p1, p2 := solve(nums)
+	fmt.Printf("Part 1: %d\nPart 2: %d\nTime Taken: %v\n", p1, p2, time.Since(solvetime))
 	fmt.Println("Total tiem:", time.Since(start))
 }
 
-func part1(numlist [][]int) int {
-	var res int
+func solve(numlist [][]int) (res, res2 int) {
 	for _, nums := range numlist {
-		res += extrapolate(nums)
+		r1, r2 := extrapolate(nums)
+		res += r1
+		res2 += r2
 	}
-	return res
+	return
 }
 
-func part2(numlist [][]int) int {
-	var res int
-	for _, nums := range numlist {
-		slices.Reverse(nums)
-		res += extrapolate(nums)
-	}
-	return res
-}
-
-func extrapolate(nums []int) int {
-	var res int
+func extrapolate(nums []int) (res, res2 int) {
 	extr := make([][]int, 0)
 	extr = append(extr, nums)
 	for {
@@ -56,10 +45,9 @@ func extrapolate(nums []int) int {
 			break
 		}
 	}
-
 	for i := len(extr) - 2; i >= 0; i-- {
-		extr[i] = append(extr[i], extr[i][len(extr[i])-1]+extr[i+1][len(extr[i+1])-1])
+		res += extr[i][len(extr[i])-1]
+		res2 = extr[i][0] - res2
 	}
-	res = extr[0][len(extr[0])-1]
-	return res
+	return
 }
