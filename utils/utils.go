@@ -190,6 +190,17 @@ func MakeIntImagePoint(lines []string) (mapping map[image.Point]int) {
 	return
 }
 
+func MapKey[K, V comparable](m map[K]V, value V) (key K, ok bool) {
+	for k, v := range m {
+		if v == value {
+			key = k
+			ok = true
+			return
+		}
+	}
+	return
+}
+
 func Adj(p, d image.Point) image.Point {
 	return p.Add(d)
 }
