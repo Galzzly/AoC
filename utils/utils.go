@@ -294,9 +294,7 @@ func CopyMap[K comparable, V any](m map[K]V) (res map[K]V) {
 
 func CopySlice[V any](s []V) (res []V) {
 	res = make([]V, len(s))
-	for k, v := range s {
-		res[k] = v
-	}
+	copy(res, s)
 	return
 }
 
@@ -381,4 +379,12 @@ func LCM(a, b int, integers ...int) int {
 	}
 
 	return result
+}
+
+func DiffInt(a, b int) int {
+	res := b - a
+	if res < 0 {
+		return -res
+	}
+	return res
 }
