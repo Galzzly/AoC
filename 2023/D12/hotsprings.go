@@ -43,7 +43,8 @@ func solve(hotsprings Hotsprings, part2 bool) (res int) {
 				hs.arrangement = append(hs.arrangement, a...)
 			}
 		}
-		go hs.getArrangement(&wg, arrangement, 0, 0, 0)
+
+		go hs.getArrangement(&wg, arrangement)
 	}
 
 	go func() {
@@ -57,7 +58,7 @@ func solve(hotsprings Hotsprings, part2 bool) (res int) {
 	return
 }
 
-func (h Hotspring) getArrangement(wg *sync.WaitGroup, arr chan int, si, ai, curr int) {
+func (h Hotspring) getArrangement(wg *sync.WaitGroup, arr chan int) {
 	defer wg.Done()
 	tested := Tested{}
 	arr <- tested.testArrangement(h.spring, h.arrangement, 0, 0, 0)
