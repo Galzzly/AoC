@@ -43,8 +43,6 @@ func solve(hotsprings Hotsprings, part2 bool) (res int) {
 				hs.arrangement = append(hs.arrangement, a...)
 			}
 		}
-
-		// h := Hotspring{s, a}
 		go hs.getArrangement(&wg, arrangement, 0, 0, 0)
 	}
 
