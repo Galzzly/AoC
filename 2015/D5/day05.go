@@ -2,17 +2,21 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"strings"
+	"time"
 
 	"github.com/Galzzly/AoC/utils"
 )
 
 func main() {
-	f := os.Args[1]
+	start := time.Now()
+	f := "input.txt"
 	lines := utils.ReadFileLineByLine(f)
-	fmt.Println("Part 1:", part1(lines))
-	fmt.Println("Part 2:", part2(lines))
+	t1 := time.Now()
+	fmt.Println("Part 1:", part1(lines), "Took:", time.Since(t1))
+	t2 := time.Now()
+	fmt.Println("Part 2:", part2(lines), "Took:", time.Since(t2))
+	fmt.Println("Total Time:", time.Since(start))
 }
 
 func part1(lines []string) (res int) {
@@ -45,7 +49,6 @@ func checkRepeat(line string) bool {
 func checkPair(line string) bool {
 	for i := range line[:len(line)-1] {
 		if strings.Count(line, line[i:i+2]) > 1 {
-
 			return true
 		}
 	}
@@ -74,7 +77,6 @@ func checkVowel(s string) bool {
 
 func checkBad(s string) bool {
 	for i := 0; i < len(s)-1; i++ {
-		// fmt.Println(s[i : i+2])
 		switch s[i : i+2] {
 		case "ab", "cd", "pq", "xy":
 			return false
