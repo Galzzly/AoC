@@ -2,16 +2,20 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"time"
 
 	"github.com/Galzzly/AoC/utils"
 )
 
 func main() {
-	f := os.Args[1]
+	start := time.Now()
+	f := "input.txt"
 	line := utils.ReadFileLineByLine(f)[0]
-	fmt.Println("Part 1:", part1(line))
-	fmt.Println("Part 2:", part2(line))
+	t1 := time.Now()
+	fmt.Println("Part 1:", part1(line), "Took:", time.Since(t1))
+	t2 := time.Now()
+	fmt.Println("Part 2:", part2(line), "Took:", time.Since(t2))
+	fmt.Println("Total Time:", time.Since(start))
 }
 
 func part1(s string) (res int) {
@@ -38,11 +42,9 @@ func part1(s string) (res int) {
 
 func part2(s string) (res int) {
 	var homes = make(map[utils.Point]bool)
-	//var rhomes = make(map[utils.Point]bool)
 	scoord := utils.Point{0, 0}
 	rcoord := utils.Point{0, 0}
 	homes[scoord] = true
-	//rhomes[rcoord] = true
 	for i, c := range s {
 		if i%2 == 0 {
 			switch c {
