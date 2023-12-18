@@ -63,16 +63,15 @@ func solve(lines []string, part2 bool) (res int) {
 		P = append(P, Points{image.Point{minX, minY}, image.Point{maxX, maxY}})
 		minX, minY = maxX, maxY
 	}
-	for i := range P {
-		res += (P[i].a.Y + P[i].b.Y) * (P[i].a.X - P[i].b.X)
-	}
 	for _, p := range P {
+		res += (p.a.Y + p.b.Y) * (p.a.X - p.b.X)
 		if p.a.X == p.b.X {
 			res += utils.Abs(p.a.Y - p.b.Y)
 			continue
 		}
 		res += utils.Abs(p.a.X - p.b.X)
 	}
+
 	res = res/2 + 1
 	return
 }
