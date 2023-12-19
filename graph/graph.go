@@ -6,28 +6,20 @@ import (
 	"time"
 )
 
-type CostedNode [T]struct {
+type CostedNode[T any] struct {
 	Node T
 	Cost int
 }
 
-type THeap [T][]CostedNode[T]
+type THeap[T any] []CostedNode[T]
 
-func (t THeap[T]) Len() int           { return len(t) }
-func (t THeap[T]) Less(i, j int) bool { return t[i].Cost < t[j].Cost }
-func (t THeap[T]) Swap(i, j int)      { t[i], t[j] = t[j], t[i] }
-
-func (t *THeap[T]) Push(x interface{}) {
-	*t = append(*t, x.(CostedNode[T]))
-}
-
-func (t *THeap[T]) Pop() interface{} {
-	old := *t
-	n := len(old)
-	x := old[n-1]
-	*t = old[0 : n-1]
-	return x
-}
+func (t THeap[T]) Len() int              { return len(t) }
+func (t THeap[T]) Less(i, j int) bool    { return t[i].Cost < t[j].Cost }
+func (t THeap[T]) Swap(i, j int)         { t[i], t[j] = t[j], t[i] }
+func (t *THeap[T]) Push(x interface{})   { *t = append(*t, x.(CostedNode[T])) }
+func (t *THeap[T]) Pop() (x interface{}) { x, *t = (*t)[len(*t)-1], (*t)[:len(*t)-1]; return }
+func (t *THeap[T]) GPush(v T, p int)     { heap.Push(t, CostedNode[T]{v, p}) }
+func (t *THeap[T]) GPop() (T, int)       { x := heap.Pop(t).(CostedNode[T]); return x.Node, x.Cost }
 
 type Traversable[T comparable] interface {
 	Neighbors(node T) []CostedNode[T]
